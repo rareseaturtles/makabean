@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Button</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: url('https://i.ibb.co/jLjSXxG/back.jpg') no-repeat center center fixed;
+            background-size: cover;
+            font-family: Arial, sans-serif;
+        }
+        .button-container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+        }
+        .button-container img {
+            cursor: pointer;
+            width: 150px;
+            height: auto;
+        }
+        .hidden-iframe {
+            position: absolute;
+            top: -9999px;
+            left: -9999px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="button-container">
+        <img src="https://i.ibb.co/5r2zfHs/maka.png" alt="Maka Button" id="makaButton">
+    </div>
+
+    <div class="hidden-iframe">
+        <iframe id="audioIframe" src="https://audio.com/embed/audio/1822194927919653?theme=light" style="display:none;"></iframe>
+    </div>
+
+    <script>
+        document.getElementById('makaButton').addEventListener('click', () => {
+            const audioIframe = document.getElementById('audioIframe');
+            const iframeSrc = audioIframe.src;
+            audioIframe.src = '';
+            audioIframe.src = iframeSrc;
+        });
+    </script>
+
+</body>
+</html>
