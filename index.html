@@ -23,6 +23,17 @@
             cursor: pointer;
             width: 150px;
             height: auto;
+            transition: transform 0.2s ease-in-out;
+        }
+        @keyframes rotate-button {
+            0% { transform: rotate(0deg); }
+            25% { transform: rotate(45deg); }
+            50% { transform: rotate(0deg); }
+            75% { transform: rotate(-45deg); }
+            100% { transform: rotate(0deg); }
+        }
+        .rotating {
+            animation: rotate-button 1s infinite;
         }
     </style>
 </head>
@@ -35,10 +46,20 @@
     <audio id="audioPlayer" src="http://commondatastorage.googleapis.com/codeskulptor-demos/DDR_assets/Sevish_-__nbsp_.mp3"></audio>
 
     <script>
-        document.getElementById('makaButton').addEventListener('click', () => {
-            const audioPlayer = document.getElementById('audioPlayer');
+        const makaButton = document.getElementById('makaButton');
+        const audioPlayer = document.getElementById('audioPlayer');
+
+        makaButton.addEventListener('click', () => {
             audioPlayer.currentTime = 0; // Restart the audio
             audioPlayer.play();
+
+            // Add rotation animation
+            makaButton.classList.add('rotating');
+
+            // Remove rotation animation when audio ends
+            audioPlayer.addEventListener('ended', () => {
+                makaButton.classList.remove('rotating');
+            });
         });
     </script>
 
