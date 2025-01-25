@@ -28,6 +28,8 @@
             position: absolute;
             top: -9999px;
             left: -9999px;
+            width: 0;
+            height: 0;
         }
     </style>
 </head>
@@ -38,15 +40,18 @@
     </div>
 
     <div class="hidden-iframe">
-        <iframe id="audioIframe" src="https://audio.com/embed/audio/1822194927919653?theme=light" style="display:none;"></iframe>
+        <iframe id="audioIframe" src="https://audio.com/embed/audio/1822194927919653?theme=light" allow="autoplay"></iframe>
     </div>
 
     <script>
         document.getElementById('makaButton').addEventListener('click', () => {
             const audioIframe = document.getElementById('audioIframe');
-            const iframeSrc = audioIframe.src;
-            audioIframe.src = '';
-            audioIframe.src = iframeSrc;
+            const iframeWindow = audioIframe.contentWindow;
+
+            if (iframeWindow) {
+                // Sending play command to the iframe
+                iframeWindow.postMessage(JSON.stringify({ event: 'command', func: 'play' }), '*');
+            }
         });
     </script>
 
