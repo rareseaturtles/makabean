@@ -11,6 +11,14 @@
             background: url('https://i.ibb.co/jLjSXxG/back.jpg') no-repeat center center fixed;
             background-size: cover;
             font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        .header {
+            font-size: 3rem;
+            color: #FFF;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+            margin-top: 20px;
+            font-family: 'Comic Sans MS', cursive, sans-serif;
         }
         .button-container {
             position: absolute;
@@ -21,7 +29,7 @@
         }
         .button-container img {
             cursor: pointer;
-            width: 500px;
+            width: 200px;
             height: auto;
             transition: transform 0.2s ease-in-out;
         }
@@ -35,12 +43,38 @@
         .rotating {
             animation: rotate-button 1s infinite;
         }
+        .footer {
+            position: absolute;
+            bottom: 20px;
+            width: 100%;
+            text-align: center;
+        }
+        .footer a {
+            font-size: 1.5rem;
+            color: #FFF;
+            text-decoration: none;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 10px 20px;
+            border-radius: 8px;
+            box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+            transition: background 0.3s ease;
+        }
+        .footer a:hover {
+            background: rgba(255, 255, 255, 0.7);
+            color: #000;
+        }
     </style>
 </head>
 <body>
 
+    <div class="header">MAKA BEAN</div>
+
     <div class="button-container">
         <img src="https://i.ibb.co/5r2zfHs/maka.png" alt="Maka Button" id="makaButton">
+    </div>
+
+    <div class="footer">
+        <a href="https://pump.fun/coin/NTn9vR7D26YS3uenrUgBwjALXf2AeA8mC59Zz7bpump" target="_blank">BUY MAKA</a>
     </div>
 
     <audio id="audioPlayer" src="http://commondatastorage.googleapis.com/codeskulptor-demos/DDR_assets/Sevish_-__nbsp_.mp3"></audio>
