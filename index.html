@@ -15,6 +15,7 @@
             position: relative;
             min-height: 100vh;
         }
+
         .header {
             font-size: 3rem;
             color: #FFF;
@@ -22,23 +23,23 @@
             margin-top: 20px;
             font-family: 'Comic Sans MS', cursive, sans-serif;
         }
+
         .button-container {
-    position: absolute;
-    top: 50%; /* Adjust the vertical position */
-    left: 50%; /* Center horizontally */
-    transform: translate(-50%, -50%); /* Center vertically */
-    text-align: center;
-    z-index: 2;
-}
-
-.button-container img {
-    cursor: pointer;
-    width: 600px; /* Adjust the width */
-    height: auto; /* Keep the aspect ratio */
-    transition: transform 0.2s ease-in-out; /* Animation effect on hover */
-}
-
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            z-index: 2;
         }
+
+        .button-container img {
+            cursor: pointer;
+            width: 300px;
+            height: auto;
+            transition: transform 0.2s ease-in-out;
+        }
+
         @keyframes rotate-button {
             0% { transform: rotate(0deg); }
             25% { transform: rotate(45deg); }
@@ -46,9 +47,11 @@
             75% { transform: rotate(-45deg); }
             100% { transform: rotate(0deg); }
         }
+
         .rotating {
             animation: rotate-button 1s infinite;
         }
+
         .footer {
             position: absolute;
             bottom: 20px;
@@ -56,6 +59,7 @@
             text-align: center;
             z-index: 1;
         }
+
         .footer a {
             font-size: 1.5rem;
             color: #FFF;
@@ -66,20 +70,21 @@
             box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
             transition: background 0.3s ease;
         }
+
         .footer a:hover {
             background: rgba(255, 255, 255, 0.7);
             color: #000;
         }
+
         .cat-button-container {
             position: absolute;
             bottom: 80px;
             left: 50%;
             transform: translateX(-50%);
-            width: 100%;
-            display: flex;
-            justify-content: center;
+            text-align: center;
             z-index: 1;
         }
+
         #fetchCatButton {
             padding: 10px 20px;
             font-size: 1.2rem;
@@ -90,9 +95,18 @@
             cursor: pointer;
             transition: background-color 0.3s ease;
         }
+
         #fetchCatButton:hover {
             background-color: #e68900;
         }
+
+        #catImage {
+            max-width: 80%;
+            margin: 20px auto;
+            display: block;
+            border-radius: 10px;
+        }
+
         @media screen and (max-width: 768px) {
             .header {
                 font-size: 2.5rem;
@@ -102,6 +116,10 @@
             }
             .footer a {
                 font-size: 1.2rem;
+                padding: 8px 16px;
+            }
+            #fetchCatButton {
+                font-size: 1rem;
                 padding: 8px 16px;
             }
         }
@@ -125,46 +143,43 @@
 
     <audio id="audioPlayer" src="https://commondatastorage.googleapis.com/codeskulptor-demos/DDR_assets/Sevish_-__nbsp_.mp3"></audio>
 
-  <script>
-    const makaButton = document.getElementById('makaButton');
-    const audioPlayer = document.getElementById('audioPlayer');
-    const fetchCatButton = document.getElementById('fetchCatButton');
+    <script>
+        const makaButton = document.getElementById('makaButton');
+        const audioPlayer = document.getElementById('audioPlayer');
+        const fetchCatButton = document.getElementById('fetchCatButton');
 
-    // Event listener for the maka button
-    makaButton.addEventListener('click', () => {
-        audioPlayer.currentTime = 0;
-        audioPlayer.play();
-        makaButton.classList.add('rotating');
-        audioPlayer.addEventListener('ended', () => {
-            makaButton.classList.remove('rotating');
+        // Maka button functionality
+        makaButton.addEventListener('click', () => {
+            audioPlayer.currentTime = 0;
+            audioPlayer.play();
+            makaButton.classList.add('rotating');
+            audioPlayer.addEventListener('ended', () => {
+                makaButton.classList.remove('rotating');
+            });
         });
-    });
 
-    // Function to fetch and display a cat image
-    fetchCatButton.addEventListener('click', async () => {
-        const apiUrl = 'https://api.thecatapi.com/v1/images/search';
-        try {
-            const response = await fetch(apiUrl);
-            const data = await response.json();
-            const catImageUrl = data[0].url;
+        // Fetch cat image functionality
+        fetchCatButton.addEventListener('click', async () => {
+            const apiUrl = 'https://api.thecatapi.com/v1/images/search';
+            try {
+                const response = await fetch(apiUrl);
+                const data = await response.json();
+                const catImageUrl = data[0].url;
 
-            // Create or update an img element to display the cat image
-            let catImageElement = document.getElementById('catImage');
-            if (!catImageElement) {
-                catImageElement = document.createElement('img');
-                catImageElement.id = 'catImage';
-                catImageElement.style.maxWidth = '80%';
-                catImageElement.style.marginTop = '20px';
-                catImageElement.style.borderRadius = '10px';
-                document.body.appendChild(catImageElement);
+                // Create or update the cat image element
+                let catImageElement = document.getElementById('catImage');
+                if (!catImageElement) {
+                    catImageElement = document.createElement('img');
+                    catImageElement.id = 'catImage';
+                    document.body.appendChild(catImageElement);
+                }
+                catImageElement.src = catImageUrl;
+            } catch (error) {
+                console.error('Error fetching cat image:', error);
+                alert('Failed to fetch a cat image. Please try again.');
             }
-            catImageElement.src = catImageUrl;
-        } catch (error) {
-            console.error('Error fetching cat image:', error);
-            alert('Failed to fetch a cat image. Please try again.');
-        }
-    });
-</script>
+        });
+    </script>
 
 </body>
 </html>
