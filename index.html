@@ -14,6 +14,7 @@
             text-align: center;
             position: relative;
             min-height: 100vh;
+            padding-bottom: 200px; /* Add space at the bottom for the cat image */
         }
 
         .header {
@@ -100,6 +101,12 @@
             background-color: #e68900;
         }
 
+        #catImageContainer {
+            position: relative;
+            margin-top: 20px;
+            text-align: center;
+        }
+
         #catImage {
             max-width: 80%;
             margin: 20px auto;
@@ -111,13 +118,16 @@
             .header {
                 font-size: 2.5rem;
             }
+
             .button-container img {
                 width: 180px;
             }
+
             .footer a {
                 font-size: 1.2rem;
                 padding: 8px 16px;
             }
+
             #fetchCatButton {
                 font-size: 1rem;
                 padding: 8px 16px;
@@ -137,6 +147,10 @@
         <button id="fetchCatButton">Show Me a Cat!</button>
     </div>
 
+    <div id="catImageContainer">
+        <!-- The cat image will appear here -->
+    </div>
+
     <div class="footer">
         <a href="https://pump.fun/coin/6WvVYirmfGWnQt4gta4YhvYtRPxQvybDqT6ztNi5pump" target="_blank">BUY MAKA</a>
     </div>
@@ -147,6 +161,7 @@
         const makaButton = document.getElementById('makaButton');
         const audioPlayer = document.getElementById('audioPlayer');
         const fetchCatButton = document.getElementById('fetchCatButton');
+        const catImageContainer = document.getElementById('catImageContainer');
 
         // Maka button functionality
         makaButton.addEventListener('click', () => {
@@ -158,7 +173,7 @@
             });
         });
 
-        // Fetch cat image functionality
+        // Fetch and display cat image
         fetchCatButton.addEventListener('click', async () => {
             const apiUrl = 'https://api.thecatapi.com/v1/images/search';
             try {
@@ -171,7 +186,7 @@
                 if (!catImageElement) {
                     catImageElement = document.createElement('img');
                     catImageElement.id = 'catImage';
-                    document.body.appendChild(catImageElement);
+                    catImageContainer.appendChild(catImageElement);
                 }
                 catImageElement.src = catImageUrl;
             } catch (error) {
