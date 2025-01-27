@@ -8,7 +8,7 @@
         body {
             margin: 0;
             padding: 0;
-            background: url("https://i.ibb.co/FxvsrZ1/stars-2643089-1920.jpg") no-repeat center center fixed;
+            background: url('https://i.ibb.co/jLjSXxG/back.jpg') no-repeat center center fixed;
             background-size: cover;
             font-family: Arial, sans-serif;
             text-align: center;
@@ -27,16 +27,17 @@
 
         .button-container {
             position: absolute;
-            top: 80%;
+            top: 60%; /* Move the Maka button lower */
             left: 50%;
             transform: translate(-50%, -50%);
             text-align: center;
             z-index: 2;
+            margin-bottom: 20px; /* Extra space below the button */
         }
 
         .button-container img {
             cursor: pointer;
-            width: 500px;
+            width: 300px;
             height: auto;
             transition: transform 0.2s ease-in-out;
         }
@@ -79,8 +80,8 @@
 
         .cat-button-container {
             position: absolute;
-            bottom: 1000px;
-            left: 75%;
+            bottom: 100px; /* Move "Show Me a Cat" button higher to create space */
+            left: 50%;
             transform: translateX(-50%);
             text-align: center;
             z-index: 1;
@@ -103,7 +104,7 @@
 
         #catImageContainer {
             position: relative;
-            margin-top: 20px;
+            margin-top: 40px; /* Add space above the cat image container */
             text-align: center;
         }
 
