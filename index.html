@@ -122,25 +122,46 @@
 
     <audio id="audioPlayer" src="https://commondatastorage.googleapis.com/codeskulptor-demos/DDR_assets/Sevish_-__nbsp_.mp3"></audio>
 
-    <script>
-        const makaButton = document.getElementById('makaButton');
-        const audioPlayer = document.getElementById('audioPlayer');
-        const fetchCatButton = document.getElementById('fetchCatButton');
+  <script>
+    const makaButton = document.getElementById('makaButton');
+    const audioPlayer = document.getElementById('audioPlayer');
+    const fetchCatButton = document.getElementById('fetchCatButton');
 
-        makaButton.addEventListener('click', () => {
-            audioPlayer.currentTime = 0;
-            audioPlayer.play();
-            makaButton.classList.add('rotating');
-            audioPlayer.addEventListener('ended', () => {
-                makaButton.classList.remove('rotating');
-            });
+    // Event listener for the maka button
+    makaButton.addEventListener('click', () => {
+        audioPlayer.currentTime = 0;
+        audioPlayer.play();
+        makaButton.classList.add('rotating');
+        audioPlayer.addEventListener('ended', () => {
+            makaButton.classList.remove('rotating');
         });
+    });
 
-        fetchCatButton.addEventListener('click', () => {
-            // Implement the functionality to fetch and display a cat image
-            // This can be done by calling an API or any other method you prefer
-        });
-    </script>
+    // Function to fetch and display a cat image
+    fetchCatButton.addEventListener('click', async () => {
+        const apiUrl = 'https://api.thecatapi.com/v1/images/search';
+        try {
+            const response = await fetch(apiUrl);
+            const data = await response.json();
+            const catImageUrl = data[0].url;
+
+            // Create or update an img element to display the cat image
+            let catImageElement = document.getElementById('catImage');
+            if (!catImageElement) {
+                catImageElement = document.createElement('img');
+                catImageElement.id = 'catImage';
+                catImageElement.style.maxWidth = '80%';
+                catImageElement.style.marginTop = '20px';
+                catImageElement.style.borderRadius = '10px';
+                document.body.appendChild(catImageElement);
+            }
+            catImageElement.src = catImageUrl;
+        } catch (error) {
+            console.error('Error fetching cat image:', error);
+            alert('Failed to fetch a cat image. Please try again.');
+        }
+    });
+</script>
 
 </body>
 </html>
